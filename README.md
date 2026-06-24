@@ -67,12 +67,12 @@ Data preparation: Dataset with the following folder structure.
 
 **Train:**
 ```bash
-python TLG-CSLR/slr/tools/train.py
+python train.py
 ```
 
 **Inference:**
 ```bash
-python TLG-CSLR/slr/tools/prediction.py
+python prediction.py
 ```
 
 ## Acknowledgment
