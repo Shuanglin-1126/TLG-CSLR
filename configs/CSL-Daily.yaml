@@ -1,0 +1,4 @@
+dataset_root: /CSL-Daily/sentence/frames_512x512
+dict_path: n/preprocess/CSL-Daily/gloss_dict.npy
+evaluation_dir: ./evaluation/slr_eval
+evaluation_prefix: CSL-Daily-groundtruth

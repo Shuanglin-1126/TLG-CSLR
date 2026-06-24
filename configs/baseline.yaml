@@ -1,0 +1,59 @@
+feeder: dataset.dataloader_video.BaseFeeder
+phase: test
+dataset: phoenix2014 #[phoenix2014, phoenix2014-T, CSL-Daily, CSL]
+# dataset: phoenix14-si5
+num_epoch: 40
+work_dir: ./output/phoenix/48/
+batch_size: 4
+random_seed: 42
+test_batch_size: 4
+num_worker: 4
+device: 0
+log_interval: 100
+eval_interval: 1
+save_interval: 500
+# python in default
+evaluate_tool: sclite
+loss_weights:
+  SeqCTC: 1.0
+  # VAC
+  ConvCTC: 1.0
+  Dist: 25.0
+  #Direct: 1.0
+load_weights:
+
+optimizer_args:
+  optimizer: AdamW
+  eps: 0.00000001
+  beta1: 0.9
+  beta2: 0.999
+  weight_decay: 0.0001
+  base_lr: 0.0001
+  minlr: 0.
+  warm_epoch: 0
+  num_epoch: 40
+  warm_lr: 0.000001
+  step: [20, 30]
+  learning_ratio: 1
+  start_epoch: 0
+  nesterov: False
+
+feeder_args:
+  mode: 'train'
+  datatype: 'video'
+  num_gloss: -1
+  drop_ratio: 1.0
+  frame_interval: 1
+  image_scale: 1.0  # 0-1 represents ratio, >1 represents absolute value
+  input_size: 224
+
+model: slr_network.SLRModel
+decode_mode: beam
+model_args:
+  num_classes: 1296  # 1296 for phoenix, 1086 for phoenixT,  2001 for csl-daily
+  c2d_type: ViT-B/16 #resnet18, RN50, ViT-B/16, ViT-L/14, ViT-L/14@336px
+  conv_type: 2
+  use_bn: 1
+  # SMKD
+  share_classifier: True
+  weight_norm: True
